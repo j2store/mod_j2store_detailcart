@@ -1,0 +1,76 @@
+.detailJ2StoreCartBlock .j2store-cart-item-image img {
+	float: left;
+	margin-right: 10px;
+}
+
+.detailJ2StoreCartBlock .j2store-cart-item-image #itemImgSmall {
+	width: 80px;
+}
+
+.detailJ2StoreCartBlock .j2store-cart-item-image #itemImgMedium {
+	width: 120px;
+}
+
+.detailJ2StoreCartBlock .j2store-cart-item-image #itemImgLarge {
+	width: 160px;
+}
+
+.mod_j2store_subtotal {
+	font-size: 16px;
+	margin-bottom: 10px;
+	float: right;
+	display: block;
+}
+
+.mod_j2store_subtotal_text {
+	
+}
+
+.mod_j2store_subtotal_value {
+	
+}
+
+.mod_j2store_cart_shipping_method {
+	padding: 5px 0px;
+}
+
+.mod_j2store_shipping_content {
+	padding: 5px 0px;
+}
+
+.mod_j2store_cart_shipping_calculator a {
+	text-decoration: none;
+	cursor: pointer;
+}
+
+.detailcart-shipping-methods .detailcart-shipping-method {
+	padding: 5px;
+	margin-top: 15px;
+}
+
+span.detailcart-shipping-method label,span.detailcart-shipping-method input
+	{
+	float: none !important;
+	display: inline;
+}
+
+#detailCart a div.j2storeCartRemove {
+	background: url("../images/remove-roll.png") no-repeat scroll 0 0
+		transparent;
+	height: 18px;
+	width: 18px;
+}
+
+#detailCart a:hover div.j2storeCartRemove {
+	background: url("../images/remove-over.png") no-repeat scroll 0 0
+		transparent;
+}
+
+.pqty-update {
+	cursor: pointer;
+}
+
+.detailcartmodule-qty-option-list {
+	list-style: none;
+	text-align: center;
+}

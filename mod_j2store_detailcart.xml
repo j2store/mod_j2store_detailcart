@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension type="module" version="2.5" method="upgrade" client="site">
+	<name>Detail Cart Advanced J2Store</name>
+	<version>3.5</version>
+	<creationDate>JAN 2019</creationDate>
+	<author>ThemeParrot</author>
+	<copyright>Copyright (c) 2016 ThemeParrot Private Ltd. All rights reserved.</copyright>
+	<authorEmail>support@themeparrot.com</authorEmail>
+	<authorUrl>http://themeparrot.com</authorUrl>	
+	<description>
+	 <![CDATA[<p>J2Store Detail Cart Advanced module. Sponsored by <a href="http://themeparrot.com">ThemeParrot</a>, makers of premium Joomla templates</p>]]>
+	</description>
+	<scriptfile>script.mod_j2store_detailcart.php</scriptfile>
+	<files>
+		<filename module="mod_j2store_detailcart">mod_j2store_detailcart.php</filename>
+		<filename>index.html</filename>
+		<filename>helper.php</filename>
+		<filename>mod_j2store_detailcart.xml</filename>
+		<folder>tmpl</folder>
+		<folder>css</folder>
+	</files>
+
+	<languages folder="language">
+		<language tag="en-GB">en-GB/en-GB.mod_j2store_detailcart.ini</language>
+		<language tag="en-GB">en-GB/en-GB.mod_j2store_detailcart.sys.ini</language>
+	</languages>
+
+	<config>
+		<fields name="params">
+			<fieldset name="basic">
+				<field name="moduleclass_sfx" type="text" default=""
+					label="Module Class Suffix"
+					description="A suffix to be applied to the css class of the module (table.moduletable), this allows individual module styling" />
+				</fieldset>
+				<fieldset name="cartitem_settings" label="j2store_detailcart_fieldset_cartitem_settings">
+				<!-- Show / Hide  Cartitem Name -->			
+				<field name="show_cartitem_name" default="1" class="btn-group" type="radio"  label="j2store_module_detailcart_config_show_cartitem_name" 
+					description="j2store_module_detailcart_config_show_cartitem_name_description">
+					<option value="1">J2STORE_SHOW</option>
+					<option value="0">J2STORE_HIDE</option>
+				</field>
+				
+				
+					<!-- Show / Hide  Cartitem sku -->		
+				<field name="show_cartitem_image" default="1" class="btn-group" type="radio"  label="j2store_module_detailcart_config_show_cartitem_image" 
+					description="j2store_module_detailcart_config_show_cartitem_image_description"
+				>
+					<option value="1">J2STORE_SHOW</option>
+					<option value="0">J2STORE_HIDE</option>
+				</field>
+				
+				<field  name="cartitem_image_width" default="100" class="input-mini"  type="text"  label="j2store_module_detailcart_config_show_cartitem_image_width" 
+					description="j2store_module_detailcart_config_show_cartitem_image_width_description" />
+											
+				<!-- Show / Hide  Cartitem Quantity -->		
+				<field name="show_cartitem_quantity" default="1" class="btn-group" type="radio"  label="j2store_module_detailcart_config_show_cartitem_quantity" 
+					description="j2store_module_detailcart_config_show_cartitem_quantity_description"
+				>
+					<option value="1">J2STORE_SHOW</option>
+					<option value="0">J2STORE_HIDE</option>
+				</field>
+				
+				
+				<!-- Show / Hide  Cartitem sku -->		
+				<field name="show_cartitem_sku" default="1" class="btn-group" type="radio"  label="j2store_module_detailcart_config_show_cartitem_sku" 
+					description="j2store_module_detailcart_config_show_cartitem_sku_description"
+				>
+					<option value="1">J2STORE_SHOW</option>
+					<option value="0">J2STORE_HIDE</option>
+				</field>
+				
+				
+				<!-- Show / Hide  Cartitem Price -->		
+				<field name="show_cartitem_price" default="1" class="btn-group" type="radio"  label="j2store_module_detailcart_config_show_cartitem_price" 
+					description="j2store_module_detailcart_config_show_cartitem_price_description"
+				>
+					<option value="1">J2STORE_SHOW</option>
+					<option value="0">J2STORE_HIDE</option>
+				</field>
+				
+				<!-- Show / Hide  	Cartitem_attribs -->		
+				<field name="show_cartitem_attribs" default="1" class="btn-group" type="radio"  label="j2store_module_detailcart_config_show_cartitem_attribs" 
+					description="j2store_module_detailcart_config_show_cartitem_attribs_description" >
+					<option value="1">J2STORE_SHOW</option>
+					<option value="0">J2STORE_HIDE</option>
+				</field>
+
+				
+				<!-- Show / Hide  Cartitem Price -->		
+				<field name="show_cartitem_tax" default="1" class="btn-group" type="radio"  label="j2store_module_detailcart_config_show_cartitem_tax" 
+					description="j2store_module_detailcart_config_show_cartitem_tax_description"
+				>
+					<option value="1">J2STORE_SHOW</option>
+					<option value="0">J2STORE_HIDE</option>
+				</field>
+				
+				
+				<!-- Show / Hide  Cartitem Price -->		
+				<field name="show_cartitem_total" default="1" class="btn-group" type="radio"  label="j2store_module_detailcart_config_show_cartitem_total" 
+					description="j2store_module_detailcart_config_show_cartitem_total_description"
+				>
+					<option value="1">J2STORE_SHOW</option>
+					<option value="0">J2STORE_HIDE</option>
+				</field>				
+				<!-- Show / Hide  Cartitem Remove option -->		
+				<field name="show_cartitem_remove_option" class="btn-group"  default="1" type="radio"  label="j2store_module_detailcart_config_show_cartitem_remove_option" 
+					description="j2store_module_detailcart_config_show_cartitem_remove_option_description"
+				>
+					<option value="1">J2STORE_SHOW</option>
+					<option value="0">J2STORE_HIDE</option>
+				</field>
+				
+				</fieldset>
+				<fieldset name="shipping_settings" label="j2store_detailcart_fieldset_shipping_settings">
+				 
+				<!-- Show / Hide  Cartitem Estimate shipping option -->		
+				<field name="show_checkout" class="btn-group" default="1" type="radio"  label="j2store_module_detailcart_config_show_checkout" 
+					description="j2store_module_detailcart_config_show_checkout_description"
+				>
+					<option value="1">J2STORE_SHOW</option>
+					<option value="0">J2STORE_HIDE</option>
+				</field>
+		
+				
+				
+				<!-- Show / Hide  Cartitem Estimate shipping option -->		
+				<field name="show_estimateshipping" class="btn-group" default="1" type="radio"  label="j2store_module_detailcart_config_show_estimateshipping" 
+					description="j2store_module_detailcart_config_show_estimateshipping_description"
+				>
+					<option value="1">J2STORE_SHOW</option>
+					<option value="0">J2STORE_HIDE</option>
+				</field>
+						
+				<!-- Show / Hide  Cartitem Force shipping option -->		
+				<field name="force_shipping" class="btn-group" default="1" type="radio"  label="j2store_module_detailcart_config_force_shipping" 
+					description="j2store_module_detailcart_config_force_shipping_description"
+				>
+					<option value="1">J2STORE_YES</option>
+					<option value="0">J2STORE_NO</option>
+				</field>			 
+
+				<!-- Show / Hide  Cartitem Force shipping option -->
+				<field name="custom_forceshipping_message" default="MOD_J2STORE_NO_SHIPPING_METHOD_MATCHES" type="text" label="j2store_module_detailcart_config_custom_forceshipping_message" 
+					description="j2store_module_detailcart_config_custom_forceshipping_message_description" />
+						
+				<!-- Show / Hide  Show Shipping country select field -->		
+				<field name="show_country" class="btn-group" default="1" type="radio"  label="j2store_module_detailcart_config_show_country" 
+					description="j2store_module_detailcart_config_show_country_description"
+				>
+					<option value="1">J2STORE_SHOW</option>
+					<option value="0">J2STORE_HIDE</option>
+				</field>													
+				<field name="country_required" class="btn-group" default="1" type="radio"  label="j2store_module_detailcart_config_show_country_required" 
+					description="j2store_module_detailcart_config_show_country_required_description"
+				>
+					<option value="1">J2STORE_SHOW</option>
+					<option value="0">J2STORE_HIDE</option>
+				</field>				
+				<!-- Show / Hide  Show Shipping zone select field -->				
+				<field name="show_zone" class="btn-group" default="1" type="radio"  label="j2store_module_detailcart_config_show_zone" 
+					description="j2store_module_detailcart_config_show_zone_description"
+				>
+					<option value="1">J2STORE_SHOW</option>
+					<option value="0">J2STORE_HIDE</option>
+				</field>
+				<field name="zone_required" class="btn-group" default="1" type="radio"  label="j2store_module_detailcart_config_show_zone_required" 
+					description="j2store_module_detailcart_config_show_zone_required_description"
+				>
+					<option value="1">J2STORE_SHOW</option>
+					<option value="0">J2STORE_HIDE</option>
+				</field>
+				<!-- Show / Hide  Show Shipping zone select field -->				
+				<field name="show_zip" class="btn-group" default="1" type="radio"  label="j2store_module_detailcart_config_show_zip" 
+					description="j2store_module_detailcart_config_show_zip_description"
+				>
+					<option value="1">J2STORE_SHOW</option>
+					<option value="0">J2STORE_HIDE</option>
+				</field>
+												
+				<!-- Show / Hide  Show Shipping zone select field -->				
+				<field name="postal_required" class="btn-group" default="1" type="radio"  label="j2store_module_detailcart_config_postalcode_required" 
+					description="j2store_module_detailcart_config_postalcode_required_description"
+				>
+					<option value="1">J2STORE_SHOW</option>
+					<option value="0">J2STORE_HIDE</option>
+				</field>		
+						
+				<!-- Show / Hide  Cart Link option -->		
+				<field name="show_cart_link" class="btn-group" default="1" type="radio"  label="j2store_module_detailcart_config_show_cart_link" 
+					description="j2store_module_detailcart_config_show_cart_link_description"
+				>
+					<option value="1">J2STORE_SHOW</option>
+					<option value="0">J2STORE_HIDE</option>
+				</field>
+					
+			</fieldset>
+			<fieldset name="advanced">
+				<field
+						name="cache"
+						type="list"
+						default="0"
+						label="COM_MODULES_FIELD_CACHING_LABEL"
+						description="COM_MODULES_FIELD_CACHING_DESC">
+
+					<option
+							value="0">COM_MODULES_FIELD_VALUE_NOCACHING</option>
+				</field>
+			</fieldset>
+		</fields>
+	</config>
+</extension>
