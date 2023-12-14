@@ -1,15 +1,16 @@
 <?php
-/*
- ------------------------------------------------------------------------
-# mod_j2store_detailcart  - J2Store Detail cart
-# ------------------------------------------------------------------------
-# author    ThemeParrot - ThemeParrot http://www.ThemeParrot.com
-# copyright Copyright (C) 2014 ThemeParrot.com. All Rights Reserved.
-# @license - http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL
-# Websites: http://ThemeParrot.com
-# Based on Latest Articles module of Joomla
+/**
+------------------------------------------------------------------------
+ * mod_j2store_detailcart - J2Store Detail cart
+ * ------------------------------------------------------------------------
+ * author    Gopi  http://www.ThemeParrot.com
+ * copyright  (C) 2023 ThemeParrot.com. All Rights Reserved.
+ * @license - http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL
+ * Websites: http://ThemeParrot.com
+ * Based on Latest Articles module of Joomla
 -------------------------------------------------------------------------
-*/
+ */
+
 // no direct access
 defined( '_JEXEC' ) or die( 'Restricted access' );
 require_once JPATH_ADMINISTRATOR .'/components/com_j2store/helpers/j2store.php';
@@ -26,15 +27,16 @@ class ModJ2StoreDetailCartHelper{
 	public static $_before_display_cart;
 	public static $_after_display_cart;
 	public static function getCartItems($params){
+        $platform=J2Store::platform();
+        $fof_helper=J2Store::fof();
 		$no_cache = $params->get('cache',0);
 		if($no_cache==0){
 			$cache = JFactory::getCache();
 			$cache->clean('com_j2store');
 			$cache->clean('mod_j2store_detailcart');
 		}
-
-		F0FModel::addIncludePath(JPATH_ADMINISTRATOR.'/components/com_j2store/models/');
-		$items = F0FModel::getTmpInstance('Carts','J2StoreModel')->getItems();
+        F0FModel::addIncludePath(JPATH_ADMINISTRATOR.'/components/com_j2store/models/');
+		$items = $fof_helper->getModel('Carts','J2StoreModel')->getItems();
 		//plugin trigger
 		self::$_before_display_cart = '';
 		$before_results = J2Store::plugin()->event('BeforeDisplayCart', array( $items) );
@@ -58,7 +60,7 @@ class ModJ2StoreDetailCartHelper{
 		}
 
 		self::$_onDisplayCartItem =  $onDisplayCartItem;
-		$order = F0FModel::getTmpInstance('Orders', 'J2StoreModel')->populateOrder($items)->getOrder();
+		$order = $fof_helper->getModel('Orders', 'J2StoreModel')->populateOrder($items)->getOrder();
 		$order->validate_order_stock();
 		self::$_order = $order;
 		$items = $order->getItems();
@@ -67,7 +69,7 @@ class ModJ2StoreDetailCartHelper{
 				foreach($item->orderitemattributes as &$attribute) {
 					if($attribute->orderitemattribute_type == 'file') {
 						unset($table);
-						$table = F0FTable::getInstance('Upload', 'J2StoreTable');
+						$table = $fof_helper->loadTable('Upload', 'J2StoreTable');
 						if($table->load(array('mangled_name'=>$attribute->orderitemattribute_value))) {
 							$attribute->orderitemattribute_value = $table->original_name;
 						}
@@ -87,7 +89,7 @@ class ModJ2StoreDetailCartHelper{
 	 *
 	 */
 	public static function getShippingData(){
-		$app = JFactory::getApplication();
+		$app = J2Store::platform()->application();
 		$session = JFactory::getSession();
 		$store_profile = J2Store::storeProfile();
 		$country_id = $app->input->getInt('country_id');
@@ -129,7 +131,7 @@ class ModJ2StoreDetailCartHelper{
 
 		J2Store::utilities()->nocache();
 		//initialise system objects
-		$app = JFactory::getApplication();
+		$app = J2Store::platform()->application();
 		$document	= JFactory::getDocument();
 		$db = JFactory::getDbo();
 		$language = JFactory::getLanguage()->getTag();
@@ -169,12 +171,12 @@ class ModJ2StoreDetailCartHelper{
 	public static function removeCartItemAjax() {
 		J2Store::utilities()->clear_cache();
 		J2Store::utilities()->nocache();
-		$app = JFactory::getApplication();
+        $fof_helper=J2Store::fof();
+		$app = J2Store::platform()->application();
 		$json = array();
 		$json['status'] = false;
 		$cartitem_id = $app->input->get ('cartitem_id',0);
-		$model = F0FModel::getTmpInstance('Carts' ,'J2StoreModel');
-		$app = JFactory::getApplication();
+		$model = $fof_helper->getModel('Carts' ,'J2StoreModel');
 		$app->set('cartitem_id',$cartitem_id);
 		$model->setInput(array('cartitem_id'=>$cartitem_id));
 		if($model->deleteItem()) {

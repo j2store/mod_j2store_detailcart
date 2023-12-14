@@ -1,24 +1,24 @@
 <?php
-/*
- ------------------------------------------------------------------------
-# mod_j2store_detailcart - J2Store Detail cart
-# ------------------------------------------------------------------------
-# author    ThemeParrot - ThemeParrot http://www.ThemeParrot.com
-# copyright Copyright (C) 2014 ThemeParrot.com. All Rights Reserved.
-# @license - http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL
-# Websites: http://ThemeParrot.com
-# Based on Latest Articles module of Joomla
+/**
+------------------------------------------------------------------------
+ * mod_j2store_detailcart - J2Store Detail cart
+ * ------------------------------------------------------------------------
+ * author    Gopi  http://www.ThemeParrot.com
+ * copyright  (C) 2023 ThemeParrot.com. All Rights Reserved.
+ * @license - http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL
+ * Websites: http://ThemeParrot.com
+ * Based on Latest Articles module of Joomla
 -------------------------------------------------------------------------
-*/
+ */
 // no direct access
 defined('_JEXEC') or die('Restricted access');
 // Include the syndicate functions only once
 require_once __DIR__ . '/helper.php';
 $moduleclass_sfx = htmlspecialchars($params->get('moduleclass_sfx'));
-
+$fof_helper=J2Store::fof();
 $document = JFactory::getDocument();
 $document->addStyleSheet(JUri::root(true).'/modules/mod_j2store_detailcart/css/detailcart.css');
-$document->addScript(JUri::root(true).'/media/j2store/js/j2store.js');
+$document->addScript('j2store-script','/media/j2store/js/j2store.js');
 $session= JFactory::getSession();
 $j2store_params = J2Store::config();
 $currency = J2Store::currency();
@@ -36,14 +36,14 @@ $postcode = ModJ2StoreDetailCartHelper::$_postcode;
 $onDisplayCartItem = ModJ2StoreDetailCartHelper::$_onDisplayCartItem;
 $before_display_cart = ModJ2StoreDetailCartHelper::$_before_display_cart;
 $after_display_cart = ModJ2StoreDetailCartHelper::$_after_display_cart;
-$cart_model = F0FModel::getTmpInstance('Carts','J2StoreModel');
+$cart_model = $fof_helper->getModel('Carts','J2StoreModel');
 $checkout_url = $cart_model->getCheckoutUrl();
 $cart_link = $cart_model->getCartUrl();
 
 //do we have shipping methods
 $shipping_methods = $session->get('shipping_methods', array(), 'j2store');
 $shipping_values = $session->get('shipping_values', array(), 'j2store');
-$app = JFactory::getApplication();
+$app = J2Store::platform()->application();
 $menu_id = $app->input->getInt('Itemid');
 if($app->getMenu()){
 	$active = $app->getMenu()->getActive();

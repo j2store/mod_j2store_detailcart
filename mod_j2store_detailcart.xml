@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <extension type="module" version="2.5" method="upgrade" client="site">
 	<name>Detail Cart Advanced J2Store</name>
-	<version>3.5</version>
-	<creationDate>JAN 2019</creationDate>
-	<author>ThemeParrot</author>
-	<copyright>Copyright (c) 2016 ThemeParrot Private Ltd. All rights reserved.</copyright>
+	<version>4.0.0</version>
+	<creationDate>DEC 2023</creationDate>
+	<author>Gopi</author>
+	<copyright>Copyright (c) 2023 themeparrot Private Ltd. All rights reserved.</copyright>
 	<authorEmail>support@themeparrot.com</authorEmail>
 	<authorUrl>http://themeparrot.com</authorUrl>	
 	<description>
@@ -19,7 +19,11 @@
 		<folder>tmpl</folder>
 		<folder>css</folder>
 	</files>
-
+	<updateservers>
+		<server type="extension" priority="2" name="Detail Cart Advanced J2Store">
+			https://cdn.j2store.net/plugins/module/mod_j2store_detailcart.xml
+		</server>
+	</updateservers>
 	<languages folder="language">
 		<language tag="en-GB">en-GB/en-GB.mod_j2store_detailcart.ini</language>
 		<language tag="en-GB">en-GB/en-GB.mod_j2store_detailcart.sys.ini</language>
@@ -28,6 +32,7 @@
 	<config>
 		<fields name="params">
 			<fieldset name="basic">
+				<field name="is_free" type="hidden" default="true" />
 				<field name="moduleclass_sfx" type="text" default=""
 					label="Module Class Suffix"
 					description="A suffix to be applied to the css class of the module (table.moduletable), this allows individual module styling" />

@@ -1,15 +1,15 @@
 <?php
-/*
- 	------------------------------------------------------------------------
-	# mod_j2store_detailcartv3 - J2Store Detail cart
-	# ------------------------------------------------------------------------
-	# author    ThemeParrot - ThemeParrot http://www.ThemeParrot.com
-	# copyright Copyright (C) 2014 ThemeParrot.com. All Rights Reserved.
-	# @license - http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL
-	# Websites: http://ThemeParrot.com
-	# Based on Latest Articles module of Joomla
-	-------------------------------------------------------------------------
-*/
+/**
+------------------------------------------------------------------------
+ * mod_j2store_detailcart - J2Store Detail cart
+ * ------------------------------------------------------------------------
+ * author    Gopi  http://www.ThemeParrot.com
+ * copyright  (C) 2023 ThemeParrot.com. All Rights Reserved.
+ * @license - http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL
+ * Websites: http://ThemeParrot.com
+ * Based on Latest Articles module of Joomla
+-------------------------------------------------------------------------
+ */
 // no direct access
 defined('_JEXEC') or die('Restricted access');
 ?>
