@@ -22,7 +22,7 @@ require_once  JPATH_ADMINISTRATOR .'/components/com_j2store/helpers/j2html.php';
 		<?php echo JText::_('J2STORE_CART_TAX_SHIPPING_CALCULATOR_HEADING'); ?>
 	</label>
 	<div id="shipping-<?php echo $module->id;?>" class="content" style="display:none;">
-		<form action="<?php echo 'index.php';?>" method="post" id="detailcart-shipping-estimate-form-<?php echo $module->id;?>" onkeypress="return estimateKeyPress(event);" onsubmit="return false;">
+		<form action="<?php echo Joomla\CMS\Router\Route::_('index.php'); ?>" method="post" id="detailcart-shipping-estimate-form-<?php echo $module->id;?>" onkeypress="return estimateKeyPress(event);" onsubmit="return false;">
 			<table>
 				<?php if($params->get('show_country',1)):?>
 					<tr>

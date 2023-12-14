@@ -13,7 +13,7 @@
 // no direct access
 defined('_JEXEC') or die('Restricted access');?>
 <?php if(isset($shipping_methods) && count($shipping_methods)): ?>
-<form action="<?php echo 'index.php'; ?>"  name="j2store-detailcart-shipping-form" id="j2store-detailcart-shipping-form-<?php echo $module->id;?>"
+<form action="<?php echo Joomla\CMS\Router\Route::_('index.php'); ?>"  name="j2store-detailcart-shipping-form" id="j2store-detailcart-shipping-form-<?php echo $module->id;?>"
 				enctype="multipart/form-data" >
 
 	<div id="j2store-detailcart-shipping" class="j2store-cart-shipping">
