@@ -155,7 +155,7 @@ $image_width =(int) $params->get('cartitem_image_width',100);
 			<?php endif; ?>
 			<!-- Show / Hide Cart item Remove Link -->
 			<?php if($params->get('show_cartitem_remove_option',1)):?>
-			<td><a class="j2store-remove remove-icon"
+			<td><a class="btn btn-small btn-danger btn-xs j2store-remove remove-icon"
 				onclick="j2storeDCremovecartItem(this);"
 				data_cartitem_id="<?php echo $citem->cartitem_id;?>"
 				href="javascript:void(0);">X</a>
