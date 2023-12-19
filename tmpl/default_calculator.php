@@ -168,45 +168,47 @@ if(!isset($zone_id)) {
 
 
 	var country_id = '<?php echo $country_id;?>';
-	function getZonelist(country_id){
-		(function($) {
-			//country_id = $(element).attr('value');
-			$.ajax({
-				url:'index.php?option=com_j2store&view=carts&task=getCountry&country_id=' + country_id,
-				type: 'get',
-				dataType: 'json',
-				beforeSend: function() {
-					$('#estimate_country_id-<?php echo $module->id?>').after('<span class="wait">&nbsp;<img src="<?php echo JUri::root(true); ?>/media/j2store/images/loader.gif" alt="" /></span>');
-				},
-				complete: function() {
-					$('.wait').remove();
-				},
-				success: function(json) {
+    function getZonelist(country_id) {
+        (function($) {
+            $('#detailcart-shipping-estimate-form-<?php echo $module->id;?> select[name=\'country_id\']').on('change', function () {
+                //country_id = $(element).attr('value');
+                $.ajax({
+                    url: 'index.php?option=com_j2store&view=carts&task=getCountry&country_id=' + this.value,
+                    type: 'get',
+                    dataType: 'json',
+                    beforeSend: function () {
+                        $('#detailcart-shipping-estimate-form-<?php echo $module->id;?>').after('<span class="wait">&nbsp;<img src="<?php echo JUri::root(true); ?>/media/j2store/images/loader.gif" alt="" /></span>');
+                    },
+                    complete: function () {
+                        $('.wait').remove();
+                    },
+                    success: function (json) {
+                        var html = '<option value=""><?php echo JText::_('J2STORE_SELECT_OPTION'); ?></option>';
 
-					html = '<option value=""><?php echo JText::_('J2STORE_SELECT_OPTION'); ?></option>';
+                        if (json['zone'] != '') {
+                            for (var i = 0; i < json['zone'].length; i++) {
+                                html += '<option value="' + json['zone'][i]['j2store_zone_id'] + '"';
 
-					if (json['zone'] != '') {
-						for (i = 0; i < json['zone'].length; i++) {
-							html += '<option value="' + json['zone'][i]['j2store_zone_id'] + '"';
+                                if (json['zone'][i]['j2store_zone_id'] == '<?php echo $zone_id; ?>') {
+                                    html += ' selected="selected"';
+                                }
 
-							if (json['zone'][i]['j2store_zone_id'] == '<?php echo $zone_id; ?>') {
-								html += ' selected="selected"';
-							}
+                                html += '>' + json['zone'][i]['zone_name'] + '</option>';
+                            }
+                        } else {
+                            html += '<option value="0" selected="selected"><?php echo JText::_('J2STORE_CHECKOUT_ZONE_NONE'); ?></option>';
+                        }
 
-							html += '>' + json['zone'][i]['zone_name'] + '</option>';
-						}
-					} else {
-						html += '<option value="0" selected="selected"><?php echo JText::_('J2STORE_CHECKOUT_ZONE_NONE'); ?></option>';
-					}
+                        $('select[name=\'zone_id\']').html(html);
+                    },
+                    error: function (xhr, ajaxOptions, thrownError) {
+                        //alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+                    }
+                });
+            });
+        })(j2store.jQuery);
+    }
 
-					$('select[name=\'zone_id\']').html(html);
-				},
-				error: function(xhr, ajaxOptions, thrownError) {
-					//alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
-				}
-			});
-		})(j2store.jQuery);
-	}
 
 	(function($) {
 		getZonelist(country_id);
@@ -219,7 +221,7 @@ if(!isset($zone_id)) {
 			getZonelist(country_id);
 		});
 
-		if($('#estimate_country_id-<?php echo $module->id?>').length > 0 ){
+		if($('#detailcart-shipping-estimate-form-<?php echo $module->id;?>').length > 0 ){
 			$('select[name=\'country_id\']').trigger('change');
 			$('input[name=\'country_id\']').change();
 		}
