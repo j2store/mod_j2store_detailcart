@@ -1,15 +1,15 @@
 <?php
-/*
- ------------------------------------------------------------------------
-# mod_j2store_detailcartv3 - J2Store Detail cart
-# ------------------------------------------------------------------------
-# author    ThemeParrot - ThemeParrot http://www.ThemeParrot.com
-# copyright Copyright (C) 2014 ThemeParrot.com. All Rights Reserved.
-# @license - http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL
-# Websites: http://ThemeParrot.com
-# Based on Latest Articles module of Joomla
+/**
+------------------------------------------------------------------------
+ * mod_j2store_detailcart - J2Store Detail cart
+ * ------------------------------------------------------------------------
+ * author    Gopi  http://www.ThemeParrot.com
+ * copyright  (C) 2023 ThemeParrot.com. All Rights Reserved.
+ * @license - http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL
+ * Websites: http://ThemeParrot.com
+ * Based on Latest Articles module of Joomla
 -------------------------------------------------------------------------
-*/
+ */
 // no direct access
 defined('_JEXEC') or die('Restricted access');
 $line_item = $params->get('show_cartitem_name',1) ||$params->get('show_cartitem_image',1) || $params->get('show_cartitem_qty',1) ||  $params->get('show_cartitem_sku',1) ;
@@ -73,10 +73,10 @@ $image_width =(int) $params->get('cartitem_image_width',100);
 		<?php foreach($cartitems as $citem): ?>
 		<?php
 			// get the cartitem params
-			$registry = new JRegistry;
-			$registry->loadString($citem->orderitem_params);
+            $platform=J2Store::platform();
+			$registry = $platform->getRegistry($citem->orderitem_params);
 			$citem->params = $registry;
-			$thumb_image = $citem->params->get('thumb_image', '');
+			$thumb_image =  $platform->getImagePath($citem->params->get('thumb_image', ''));
 		?>
 		<tr class="cartitem-tr"
 			id="cartitem-row-<?php echo $citem->cartitem_id;?>">
@@ -155,7 +155,7 @@ $image_width =(int) $params->get('cartitem_image_width',100);
 			<?php endif; ?>
 			<!-- Show / Hide Cart item Remove Link -->
 			<?php if($params->get('show_cartitem_remove_option',1)):?>
-			<td><a class="j2store-remove remove-icon"
+			<td><a class="btn btn-small btn-danger btn-xs j2store-remove remove-icon"
 				onclick="j2storeDCremovecartItem(this);"
 				data_cartitem_id="<?php echo $citem->cartitem_id;?>"
 				href="javascript:void(0);">X</a>

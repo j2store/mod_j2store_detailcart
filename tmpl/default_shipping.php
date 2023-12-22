@@ -1,19 +1,19 @@
 <?php
-/*
- 	------------------------------------------------------------------------
-	# mod_j2store_detailcartv3 - J2Store Detail cart
-	# ------------------------------------------------------------------------
-	# author    ThemeParrot - ThemeParrot http://www.ThemeParrot.com
-	# copyright Copyright (C) 2014 ThemeParrot.com. All Rights Reserved.
-	# @license - http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL
-	# Websites: http://ThemeParrot.com
-	# Based on Latest Articles module of Joomla
-	-------------------------------------------------------------------------
-*/
+/**
+------------------------------------------------------------------------
+ * mod_j2store_detailcart - J2Store Detail cart
+ * ------------------------------------------------------------------------
+ * author    Gopi  http://www.ThemeParrot.com
+ * copyright  (C) 2023 ThemeParrot.com. All Rights Reserved.
+ * @license - http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL
+ * Websites: http://ThemeParrot.com
+ * Based on Latest Articles module of Joomla
+-------------------------------------------------------------------------
+ */
 // no direct access
 defined('_JEXEC') or die('Restricted access');?>
 <?php if(isset($shipping_methods) && count($shipping_methods)): ?>
-<form action="<?php echo JRoute::_('index.php'); ?>"  name="j2store-detailcart-shipping-form" id="j2store-detailcart-shipping-form-<?php echo $module->id;?>"
+<form action="<?php echo Joomla\CMS\Router\Route::_('index.php'); ?>"  name="j2store-detailcart-shipping-form" id="j2store-detailcart-shipping-form-<?php echo $module->id;?>"
 				enctype="multipart/form-data" >
 
 	<div id="j2store-detailcart-shipping" class="j2store-cart-shipping">

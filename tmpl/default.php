@@ -1,21 +1,21 @@
 <?php
-/*
- 	------------------------------------------------------------------------
-	# mod_j2store_detailcartv3 - J2Store Detail cart
-	# ------------------------------------------------------------------------
-	# author    ThemeParrot - ThemeParrot http://www.ThemeParrot.com
-	# copyright Copyright (C) 2014 ThemeParrot.com. All Rights Reserved.
-	# @license - http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL
-	# Websites: http://ThemeParrot.com
-	# Based on Latest Articles module of Joomla
-	-------------------------------------------------------------------------
-*/
+/**
+------------------------------------------------------------------------
+ * mod_j2store_detailcart - J2Store Detail cart
+ * ------------------------------------------------------------------------
+ * author    Gopi  http://www.ThemeParrot.com
+ * copyright  (C) 2023 ThemeParrot.com. All Rights Reserved.
+ * @license - http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL
+ * Websites: http://ThemeParrot.com
+ * Based on Latest Articles module of Joomla
+-------------------------------------------------------------------------
+ */
 
 // no direct access
 defined('_JEXEC') or die('Restricted access');
 $row_header = 0;
 $force_shipping = $params->get('force_shipping',0);
-$app = JFactory::getApplication();
+$app = J2Store::platform()->application();
 $ajax = $app->getUserState('mod_j2store_detailcart.isAjax');
 
 //show only if a shipping method is chosen
@@ -31,7 +31,7 @@ if(isset($shipping_method) && count($shipping_method)) {
 <?php endif;?>
 			 <?php if(!empty($cartitems)):?>
 			 <div class="span12"><?php echo $before_display_cart;?></div>
-			 
+
 	<div class="row-fluid">
 		<div class="span12 col-md-12 col-sm-12 col-xs-12 col-lg-12">
 			 	<div class="table-responsive">
@@ -84,7 +84,7 @@ if(isset($shipping_method) && count($shipping_method)) {
 					<?php echo JText::_('J2STORE_DETAILCART_ITEM_EMPTY');?>
 				</p>
 			<?php endif;?>
-		
+
 	<?php if(!$ajax):?>
 	</div>
 </div>
