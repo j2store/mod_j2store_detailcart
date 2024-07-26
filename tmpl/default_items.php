@@ -1,21 +1,22 @@
 <?php
-/*
- ------------------------------------------------------------------------
-# mod_j2store_detailcartv3 - J2Store Detail cart
-# ------------------------------------------------------------------------
-# author    ThemeParrot - ThemeParrot http://www.ThemeParrot.com
-# copyright Copyright (C) 2014 ThemeParrot.com. All Rights Reserved.
-# @license - http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL
-# Websites: http://ThemeParrot.com
-# Based on Latest Articles module of Joomla
+/**
+------------------------------------------------------------------------
+ * mod_j2store_detailcart - J2Store Detail cart
+ * ------------------------------------------------------------------------
+ * author    Gopi  http://www.ThemeParrot.com
+ * copyright  (C) 2024 ThemeParrot.com. All Rights Reserved.
+ * @license - http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL
+ * Websites: http://ThemeParrot.com
+ * Based on Latest Articles module of Joomla
 -------------------------------------------------------------------------
-*/
+ */
 // no direct access
+use Joomla\CMS\Helper\ModuleHelper;
+use Joomla\CMS\Language\Text;
+
 defined('_JEXEC') or die('Restricted access');
 $line_item = $params->get('show_cartitem_name',1) ||$params->get('show_cartitem_image',1) || $params->get('show_cartitem_qty',1) ||  $params->get('show_cartitem_sku',1) ;
 $image_width =(int) $params->get('cartitem_image_width',100);
-//$app = JFactory::getApplication();
-//$menu_id = $app->getMenu()->getActive()->id;
 ?>
 <style type="text/css">
 #detailcart-table-<?php echo $module->id ;?>  .dccart-thumb-image img {
@@ -29,7 +30,7 @@ $image_width =(int) $params->get('cartitem_image_width',100);
 			<?php if($line_item):?>
 			<?php $row_header+=1; ?>
 			<th>
-				<?php echo JText::_('J2STORE_CART_LINE_ITEM'); ?>
+				<?php echo Text::_('J2STORE_CART_LINE_ITEM'); ?>
 			</th>
 			<?php endif;?>
 
@@ -37,7 +38,7 @@ $image_width =(int) $params->get('cartitem_image_width',100);
 			<?php if($params->get('show_cartitem_quantity',1)):?>
 			<?php $row_header+=1; ?>
 			<th>
-				<?php echo JText::_('J2STORE_CART_LINE_ITEM_QUANTITY'); ?>
+				<?php echo Text::_('J2STORE_CART_LINE_ITEM_QUANTITY'); ?>
 			</th>
 			<?php endif;?>
 
@@ -45,7 +46,7 @@ $image_width =(int) $params->get('cartitem_image_width',100);
 			<?php if(isset($taxes) && count($taxes) &&  $params->get('show_cartitem_tax',1)):?>
 			<?php $row_header+=1; ?>
 			<th>
-				<?php echo JText::_('J2STORE_CART_LINE_ITEM_TAX'); ?>
+				<?php echo Text::_('J2STORE_CART_LINE_ITEM_TAX'); ?>
 			</th>
 			<?php endif;?>
 
@@ -53,7 +54,7 @@ $image_width =(int) $params->get('cartitem_image_width',100);
 			<?php if($params->get('show_cartitem_total',1)):?>
 			<?php $row_header+=1; ?>
 			<th>
-				<?php echo JText::_('J2STORE_CART_LINE_ITEM_TOTAL'); ?>
+				<?php echo Text::_('J2STORE_CART_LINE_ITEM_TOTAL'); ?>
 			</th>
 			<?php endif;?>
 
@@ -73,10 +74,10 @@ $image_width =(int) $params->get('cartitem_image_width',100);
 		<?php foreach($cartitems as $citem): ?>
 		<?php
 			// get the cartitem params
-			$registry = new JRegistry;
-			$registry->loadString($citem->orderitem_params);
+            $platform = J2Store::platform();
+			$registry = $platform->getRegistry($citem->orderitem_params);
 			$citem->params = $registry;
-			$thumb_image = $citem->params->get('thumb_image', '');
+			$thumb_image =  $platform->getImagePath($citem->params->get('thumb_image', ''));
 		?>
 		<tr class="cartitem-tr"
 			id="cartitem-row-<?php echo $citem->cartitem_id;?>">
@@ -102,7 +103,7 @@ $image_width =(int) $params->get('cartitem_image_width',100);
 					<?php if(isset($citem->orderitemattributes) && $citem->orderitemattributes): ?>
 						<span class="cart-item-options">
 						<?php foreach ($citem->orderitemattributes as $attribute): ?>
-							<small> - <?php echo JText::_($attribute->orderitemattribute_name); ?>
+							<small> - <?php echo Text::_($attribute->orderitemattribute_name); ?>
 								: <?php echo $attribute->orderitemattribute_value; ?>
 						</small> <br />
 						<?php endforeach;?>
@@ -113,7 +114,7 @@ $image_width =(int) $params->get('cartitem_image_width',100);
 					<!-- Show  / Hide Cartitem Price -->
 					<?php if($params->get('show_cartitem_price', 1)): ?>
 					<span class="cart-product-unit-price"> <span
-						class="cart-item-title"><?php echo JText::_('J2STORE_CART_LINE_ITEM_UNIT_PRICE'); ?>
+						class="cart-item-title"><?php echo Text::_('J2STORE_CART_LINE_ITEM_UNIT_PRICE'); ?>
 					</span> <span class="cart-item-value"> <?php echo $currency->format($order->get_formatted_lineitem_price($citem, $j2store_params->get('checkout_price_display_options', 1))); ?>
 
 					</span>
@@ -124,14 +125,14 @@ $image_width =(int) $params->get('cartitem_image_width',100);
 					<?php if($params->get('show_cartitem_sku', 1)): ?>
 					<br />
 					<span class="cart-product-sku"> <span
-						class="cart-item-title"><?php echo JText::_('J2STORE_CART_LINE_ITEM_SKU'); ?>
+						class="cart-item-title"><?php echo Text::_('J2STORE_CART_LINE_ITEM_SKU'); ?>
 					</span> <span class="cart-item-value"><?php echo $citem->orderitem_sku; ?>
 					</span>
 					</span>
 					<?php endif; ?>
-					<?php if(isset($onDisplayCartItem[$i])):?>
+					<?php if(isset($ondisplay_cartitem[$i])):?>
 							<br/>
-							<?php echo $onDisplayCartItem[$i];?>						
+							<?php echo $ondisplay_cartitem[$i];?>
 						<?php endif;?>
 						<?php $i++;?>
 						<?php echo J2Store::plugin()->eventWithHtml('AfterDisplayLineItemTitle', array($citem, $order, $params));?>
@@ -155,7 +156,7 @@ $image_width =(int) $params->get('cartitem_image_width',100);
 			<?php endif; ?>
 			<!-- Show / Hide Cart item Remove Link -->
 			<?php if($params->get('show_cartitem_remove_option',1)):?>
-			<td><a class="j2store-remove remove-icon"
+			<td><a class="btn btn-small btn-danger btn-xs j2store-remove remove-icon"
 				onclick="j2storeDCremovecartItem(this);"
 				data_cartitem_id="<?php echo $citem->cartitem_id;?>"
 				href="javascript:void(0);">X</a>
@@ -168,7 +169,7 @@ $image_width =(int) $params->get('cartitem_image_width',100);
 		</tbody>
 		<!-- CARTITEM  TOTAL  SUMMARY -->
 		<?php if($params->get('show_carttotal',1)):?>
-			<?php  require JModuleHelper::getLayoutPath('mod_j2store_detailcart',  $params->get('layout', 'default').'_total');?>
+			<?php  require ModuleHelper::getLayoutPath('mod_j2store_detailcart',  $params->get('layout', 'default').'_total');?>
 			<?php endif;?>
 		<?php endif?>
 </table>
