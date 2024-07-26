@@ -23,11 +23,8 @@ defined('_JEXEC') or die('Restricted access');?>
 	<h3><?php echo Text::_('J2STORE_CHECKOUT_SELECT_A_SHIPPING_METHOD');?></h3>
 	<?php foreach($shipping_methods as $method): ?>
 	<?php
-		$checked = '';
-		if(isset($shipping_values['shipping_name']) && $shipping_values['shipping_name']==$method['name']) {
-			$checked = 'checked';
-		}
-	?>
+		$checked = (isset($shipping_values['shipping_name']) && $shipping_values['shipping_name'] == $method['name']) ? 'checked' : '';
+		?>
 	<input type="radio" id="shipping_<?php echo $method['element']; ?>" rel="<?php echo addslashes($method['name'])?>" name="shipping_method" <?php echo $checked; ?> onClick="j2storeDCUpdateShipping('<?php echo addslashes($method['name']); ?>','<?php echo $method['price']; ?>',<?php echo $method['tax']; ?>,<?php echo $method['extra']; ?>, '<?php echo $method['code']; ?>', true );" />
 	<label for="shipping_<?php echo $method['element']; ?>" onClick="j2storeDCUpdateShipping('<?php echo addslashes($method['name']); ?>','<?php echo $method['price']; ?>',<?php echo $method['tax']; ?>,<?php echo $method['extra']; ?>, '<?php echo $method['code']; ?>', true );">
 		<?php echo stripslashes(Text::_($method['name'])); ?> ( <?php echo $currency->format( $method['total']); ?> )

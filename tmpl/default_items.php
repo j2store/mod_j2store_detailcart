@@ -17,8 +17,6 @@ use Joomla\CMS\Language\Text;
 defined('_JEXEC') or die('Restricted access');
 $line_item = $params->get('show_cartitem_name',1) ||$params->get('show_cartitem_image',1) || $params->get('show_cartitem_qty',1) ||  $params->get('show_cartitem_sku',1) ;
 $image_width =(int) $params->get('cartitem_image_width',100);
-//$app = JFactory::getApplication();
-//$menu_id = $app->getMenu()->getActive()->id;
 ?>
 <style type="text/css">
 #detailcart-table-<?php echo $module->id ;?>  .dccart-thumb-image img {

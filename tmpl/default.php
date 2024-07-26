@@ -22,11 +22,7 @@ $app = J2Store::platform()->application();
 $ajax = $app->getUserState('mod_j2store_detailcart.isAjax');
 
 //show only if a shipping method is chosen
-$show_checkout = false;
-if(isset($shipping_method) && count($shipping_method)) {
-		$show_checkout = true;
-}
-
+$show_checkout = !empty($shipping_method);
 ?>
 <?php if(!$ajax): ?>
 	<div id="dcart-block-<?php echo $module->id;?>" class="mod_j2store_detailcart_<?php echo $module->id;?> detailJ2StoreCartBlock<?php if($params->get('moduleclass_sfx')) echo ' '.$params->get('moduleclass_sfx'); ?>">
