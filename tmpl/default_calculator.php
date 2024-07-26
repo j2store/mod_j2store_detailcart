@@ -42,16 +42,16 @@ require_once  JPATH_ADMINISTRATOR .'/components/com_j2store/helpers/j2html.php';
 								->name('country_id')
 								->idTag('estimate_country_id')
 								->value($country_id)
-								->attribs(array('class'=>'dcart-shipping-input'))
-								->setPlaceHolders(array(''=>Text::_('J2STORE_SELECT_OPTION')))
+								->attribs(['class'=>'dcart-shipping-input'])
+								->setPlaceHolders([''=>Text::_('J2STORE_SELECT_OPTION')])
 								->hasOne('Countries')
 								->setRelations(
-									array (
-										'fields' => array (
+									[
+										'fields' => [
 											'key'=>'j2store_country_id',
 											'name'=>'country_name'
-										)
-									)
+										]
+									]
 								)->getHtml();
 
 							?>

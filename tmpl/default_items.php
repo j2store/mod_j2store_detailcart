@@ -135,7 +135,7 @@ $image_width =(int) $params->get('cartitem_image_width',100);
 							<?php echo $ondisplay_cartitem[$i];?>
 						<?php endif;?>
 						<?php $i++;?>
-						<?php echo J2Store::plugin()->eventWithHtml('AfterDisplayLineItemTitle', array($citem, $order, $params));?>
+						<?php echo J2Store::plugin()->eventWithHtml('AfterDisplayLineItemTitle', [$citem, $order, $params]);?>
 			</td>
 			<?php endif;?>
 

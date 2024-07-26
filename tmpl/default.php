@@ -74,7 +74,7 @@ $show_checkout = !empty($shipping_method);
 						<a class="btn btn-success" href="<?php echo $cart_link; ?>" > <?php echo Text::_('J2STORE_PROCEED_TO_CARTS'); ?> </a>
 					</span>
 				<?php endif;?>
-				<span><?php echo J2Store::plugin()->eventWithHtml('AfterDisplayCheckoutButton', array($order)); ?></span>
+				<span><?php echo J2Store::plugin()->eventWithHtml('AfterDisplayCheckoutButton',[$order]); ?></span>
 			</div>
 			</div>
 		</div>
