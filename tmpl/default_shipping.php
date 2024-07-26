@@ -4,20 +4,23 @@
  * mod_j2store_detailcart - J2Store Detail cart
  * ------------------------------------------------------------------------
  * author    Gopi  http://www.ThemeParrot.com
- * copyright  (C) 2023 ThemeParrot.com. All Rights Reserved.
+ * copyright  (C) 2024 ThemeParrot.com. All Rights Reserved.
  * @license - http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL
  * Websites: http://ThemeParrot.com
  * Based on Latest Articles module of Joomla
 -------------------------------------------------------------------------
  */
 // no direct access
+use Joomla\CMS\Language\Text;
+use Joomla\CMS\Router\Route;
+
 defined('_JEXEC') or die('Restricted access');?>
 <?php if(isset($shipping_methods) && count($shipping_methods)): ?>
-<form action="<?php echo Joomla\CMS\Router\Route::_('index.php'); ?>"  name="j2store-detailcart-shipping-form" id="j2store-detailcart-shipping-form-<?php echo $module->id;?>"
+<form action="<?php echo Route::_('index.php'); ?>"  name="j2store-detailcart-shipping-form" id="j2store-detailcart-shipping-form-<?php echo $module->id;?>"
 				enctype="multipart/form-data" >
 
 	<div id="j2store-detailcart-shipping" class="j2store-cart-shipping">
-	<h3><?php echo JText::_('J2STORE_CHECKOUT_SELECT_A_SHIPPING_METHOD');?></h3>
+	<h3><?php echo Text::_('J2STORE_CHECKOUT_SELECT_A_SHIPPING_METHOD');?></h3>
 	<?php foreach($shipping_methods as $method): ?>
 	<?php
 		$checked = '';
@@ -27,7 +30,7 @@ defined('_JEXEC') or die('Restricted access');?>
 	?>
 	<input type="radio" id="shipping_<?php echo $method['element']; ?>" rel="<?php echo addslashes($method['name'])?>" name="shipping_method" <?php echo $checked; ?> onClick="j2storeDCUpdateShipping('<?php echo addslashes($method['name']); ?>','<?php echo $method['price']; ?>',<?php echo $method['tax']; ?>,<?php echo $method['extra']; ?>, '<?php echo $method['code']; ?>', true );" />
 	<label for="shipping_<?php echo $method['element']; ?>" onClick="j2storeDCUpdateShipping('<?php echo addslashes($method['name']); ?>','<?php echo $method['price']; ?>',<?php echo $method['tax']; ?>,<?php echo $method['extra']; ?>, '<?php echo $method['code']; ?>', true );">
-		<?php echo stripslashes(JText::_($method['name'])); ?> ( <?php echo $currency->format( $method['total']); ?> )
+		<?php echo stripslashes(Text::_($method['name'])); ?> ( <?php echo $currency->format( $method['total']); ?> )
 	</label>
 
 	<?php endforeach; ?>

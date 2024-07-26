@@ -4,7 +4,7 @@
  * mod_j2store_detailcart - J2Store Detail cart
  * ------------------------------------------------------------------------
  * author    Gopi  http://www.ThemeParrot.com
- * copyright  (C) 2023 ThemeParrot.com. All Rights Reserved.
+ * copyright  (C) 2024 ThemeParrot.com. All Rights Reserved.
  * @license - http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL
  * Websites: http://ThemeParrot.com
  * Based on Latest Articles module of Joomla
@@ -12,6 +12,9 @@
  */
 
 // no direct access
+use Joomla\CMS\Language\Text;
+use Joomla\CMS\Router\Route;
+
 defined( '_JEXEC' ) or die( 'Restricted access' );
 require_once  JPATH_ADMINISTRATOR .'/components/com_j2store/helpers/j2html.php';
 
@@ -19,10 +22,10 @@ require_once  JPATH_ADMINISTRATOR .'/components/com_j2store/helpers/j2html.php';
 <div id="j2store-cart-modules">
 	<label>
 		<input type="radio" name="next" value="shipping-<?php echo $module->id;?>" id="shipping_estimate" />
-		<?php echo JText::_('J2STORE_CART_TAX_SHIPPING_CALCULATOR_HEADING'); ?>
+		<?php echo Text::_('J2STORE_CART_TAX_SHIPPING_CALCULATOR_HEADING'); ?>
 	</label>
 	<div id="shipping-<?php echo $module->id;?>" class="content" style="display:none;">
-		<form action="<?php echo Joomla\CMS\Router\Route::_('index.php'); ?>" method="post" id="detailcart-shipping-estimate-form-<?php echo $module->id;?>" onkeypress="return estimateKeyPress(event);" onsubmit="return false;">
+		<form action="<?php echo Route::_('index.php'); ?>" method="post" id="detailcart-shipping-estimate-form-<?php echo $module->id;?>" onkeypress="return estimateKeyPress(event);" onsubmit="return false;">
 			<table>
 				<?php if($params->get('show_country',1)):?>
 					<tr>
@@ -30,7 +33,7 @@ require_once  JPATH_ADMINISTRATOR .'/components/com_j2store/helpers/j2html.php';
 							<?php if($params->get('country_required',1)):?>
 								<span class="required">*</span>
 							<?php endif;?>
-							<?php echo JText::_('J2STORE_SELECT_A_COUNTRY'); ?></td>
+							<?php echo Text::_('J2STORE_SELECT_A_COUNTRY'); ?></td>
 						<td>
 
 							<?php
@@ -40,7 +43,7 @@ require_once  JPATH_ADMINISTRATOR .'/components/com_j2store/helpers/j2html.php';
 								->idTag('estimate_country_id')
 								->value($country_id)
 								->attribs(array('class'=>'dcart-shipping-input'))
-								->setPlaceHolders(array(''=>JText::_('J2STORE_SELECT_OPTION')))
+								->setPlaceHolders(array(''=>Text::_('J2STORE_SELECT_OPTION')))
 								->hasOne('Countries')
 								->setRelations(
 									array (
@@ -66,7 +69,7 @@ require_once  JPATH_ADMINISTRATOR .'/components/com_j2store/helpers/j2html.php';
 							<?php if($params->get('zone_required',1)):?>
 								<span class="required">*</span>
 							<?php endif;?>
-							<?php echo JText::_('J2STORE_STATE_PROVINCE'); ?></td>
+							<?php echo Text::_('J2STORE_STATE_PROVINCE'); ?></td>
 						<td><select data_country_id="<?php echo $country_id;?>" id="estimate_zone_id" name="zone_id">
 							</select></td>
 						<input type="hidden" id="zone_required" name="zone_required" value="<?php echo $params->get('zone_required',1);?>"/>
@@ -80,7 +83,7 @@ require_once  JPATH_ADMINISTRATOR .'/components/com_j2store/helpers/j2html.php';
 							<?php if($params->get('postal_required', 1)): ?>
 								<span class="required">*</span>
 							<?php endif;?>
-							<?php echo JText::_('J2STORE_POSTCODE'); ?>
+							<?php echo Text::_('J2STORE_POSTCODE'); ?>
 						</td>
 						<td><input type="text" id="estimate_postcode" name="postcode" value="<?php echo $postcode; ?>" onkeypress="return estimateKeyPress(event);"/></td>
 					</tr>
@@ -88,7 +91,7 @@ require_once  JPATH_ADMINISTRATOR .'/components/com_j2store/helpers/j2html.php';
 					<input type="hidden" id="postal_required" name="postal_required" value="0"/>
 				<?php endif;?>
 			</table>
-			<input type="button" value="<?php echo JText::_('J2STORE_CART_CALCULATE_TAX_SHIPPING'); ?>" id="dc-button-quote-<?php echo $module->id;?>" class="btn btn-primary" />
+			<input type="button" value="<?php echo Text::_('J2STORE_CART_CALCULATE_TAX_SHIPPING'); ?>" id="dc-button-quote-<?php echo $module->id;?>" class="btn btn-primary" />
 			<input type="hidden" name="option" value="com_j2store" />
 			<input type="hidden" name="view" value="carts" />
 			<input type="hidden" name="task" value="estimate" />
@@ -183,7 +186,7 @@ if(!isset($zone_id)) {
                         $('.wait').remove();
                     },
                     success: function (json) {
-                        var html = '<option value=""><?php echo JText::_('J2STORE_SELECT_OPTION'); ?></option>';
+                        var html = '<option value=""><?php echo Text::_('J2STORE_SELECT_OPTION'); ?></option>';
 
                         if (json['zone'] != '') {
                             for (var i = 0; i < json['zone'].length; i++) {
@@ -196,7 +199,7 @@ if(!isset($zone_id)) {
                                 html += '>' + json['zone'][i]['zone_name'] + '</option>';
                             }
                         } else {
-                            html += '<option value="0" selected="selected"><?php echo JText::_('J2STORE_CHECKOUT_ZONE_NONE'); ?></option>';
+                            html += '<option value="0" selected="selected"><?php echo Text::_('J2STORE_CHECKOUT_ZONE_NONE'); ?></option>';
                         }
 
                         $('select[name=\'zone_id\']').html(html);

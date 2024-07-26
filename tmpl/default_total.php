@@ -4,19 +4,21 @@
  * mod_j2store_detailcart - J2Store Detail cart
  * ------------------------------------------------------------------------
  * author    Gopi  http://www.ThemeParrot.com
- * copyright  (C) 2023 ThemeParrot.com. All Rights Reserved.
+ * copyright  (C) 2024 ThemeParrot.com. All Rights Reserved.
  * @license - http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL
  * Websites: http://ThemeParrot.com
  * Based on Latest Articles module of Joomla
 -------------------------------------------------------------------------
  */
 // no direct access
+use Joomla\CMS\Language\Text;
+
 defined('_JEXEC') or die('Restricted access');
 ?>
 <?php if($totals = $order->get_formatted_order_totals()): ?>
 <tr>
 	<td colspan="<?php echo $row_header;?>">
-		<?php echo JText::_('J2STORE_CART_TOTALS'); ?>
+		<?php echo Text::_('J2STORE_CART_TOTALS'); ?>
 	</td>
 </tr>
 <?php foreach($totals as $total): ?>

@@ -11,16 +11,14 @@
 -------------------------------------------------------------------------
  */
 // no direct access
+use Joomla\CMS\Helper\ModuleHelper;
+
 defined('_JEXEC') or die('Restricted access');
 // Include the syndicate functions only once
 require_once __DIR__ . '/helper.php';
 $moduleclass_sfx = htmlspecialchars($params->get('moduleclass_sfx'));
-$fof_helper=J2Store::fof();
 $platform = J2Store::platform();
-$document = JFactory::getDocument();
-$document->addStyleSheet(JUri::root(true),'/modules/mod_j2store_detailcart/css/detailcart.css');
-//$document->addScript(JUri::root(true).'/media/j2store/js/j2store.js');
-$session= JFactory::getSession();
+$platform->addStyle('j2store-detailcart','/modules/mod_j2store_detailcart/css/detailcart.css');
 $j2store_params = J2Store::config();
 $currency = J2Store::currency();
 
@@ -34,22 +32,21 @@ $taxes = ModJ2StoreDetailCartHelper::$_taxes;
 $country_id = ModJ2StoreDetailCartHelper::$_country_id;
 $zone_id = ModJ2StoreDetailCartHelper::$_zone_id;
 $postcode = ModJ2StoreDetailCartHelper::$_postcode;
-$onDisplayCartItem = ModJ2StoreDetailCartHelper::$_onDisplayCartItem;
+$ondisplay_cartitem = ModJ2StoreDetailCartHelper::$_ondisplay_cartitem;
 $before_display_cart = ModJ2StoreDetailCartHelper::$_before_display_cart;
 $after_display_cart = ModJ2StoreDetailCartHelper::$_after_display_cart;
-$cart_model = $fof_helper->getModel('Carts','J2StoreModel');
+$cart_model = J2Store::fof()->getModel('Carts','J2StoreModel');
 $checkout_url = $cart_model->getCheckoutUrl();
 $cart_link = $cart_model->getCartUrl();
 
 //do we have shipping methods
-$shipping_methods = $session->get('shipping_methods', array(), 'j2store');
-$shipping_values = $session->get('shipping_values', array(), 'j2store');
-$app = J2Store::platform()->application();
-$menu_id = $app->input->getInt('Itemid');
-if($app->getMenu()){
-	$active = $app->getMenu()->getActive();
+$shipping_methods = $platform->application()->getSession()->get('shipping_methods', [], 'j2store');
+$shipping_values = $platform->application()->getSession()->get('shipping_values', [], 'j2store');
+$menu_id = $platform->application()->input->getInt('Itemid');
+if($platform->application()->getMenu()){
+	$active = $platform->application()->getMenu()->getActive();
 	if(isset($active)){
-		$menu_id = $app->getMenu()->getActive()->id;
+		$menu_id = $platform->application()->getMenu()->getActive()->id;
 	}
 }
 $menu_id = isset($menu_id) ? $menu_id : 0;
@@ -92,7 +89,7 @@ $script = "
 				});
 	})(j2store.jQuery);
 ";
-$document->addScriptDeclaration($script);
-require JModuleHelper::getLayoutPath('mod_j2store_detailcart', $layout);
+$platform->addInlineScript($script);
+require ModuleHelper::getLayoutPath('mod_j2store_detailcart', $layout);
 
 ?>
