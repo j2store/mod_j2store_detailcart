@@ -173,8 +173,7 @@ if(!isset($zone_id)) {
 	var country_id = '<?php echo $country_id;?>';
     function getZonelist(country_id) {
         (function($) {
-            $('#detailcart-shipping-estimate-form-<?php echo $module->id;?> select[name=\'country_id\']').on('change', function () {
-                //country_id = $(element).attr('value');
+            $(document).on('change','#detailcart-shipping-estimate-form-<?php echo $module->id;?> select[name=\'country_id\']', function () {
                 $.ajax({
                     url: 'index.php?option=com_j2store&view=carts&task=getCountry&country_id=' + this.value,
                     type: 'get',
