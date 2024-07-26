@@ -18,6 +18,7 @@ defined('_JEXEC') or die('Restricted access');
 require_once __DIR__ . '/helper.php';
 $moduleclass_sfx = htmlspecialchars($params->get('moduleclass_sfx'));
 $platform = J2Store::platform();
+$app = $platform->application();
 $platform->addStyle('j2store-detailcart','/modules/mod_j2store_detailcart/css/detailcart.css');
 $j2store_params = J2Store::config();
 $currency = J2Store::currency();
@@ -40,13 +41,13 @@ $checkout_url = $cart_model->getCheckoutUrl();
 $cart_link = $cart_model->getCartUrl();
 
 //do we have shipping methods
-$shipping_methods = $platform->application()->getSession()->get('shipping_methods', [], 'j2store');
-$shipping_values = $platform->application()->getSession()->get('shipping_values', [], 'j2store');
-$menu_id = $platform->application()->input->getInt('Itemid');
-if($platform->application()->getMenu()){
-	$active = $platform->application()->getMenu()->getActive();
+$shipping_methods = $app->getSession()->get('shipping_methods', [], 'j2store');
+$shipping_values = $app->getSession()->get('shipping_values', [], 'j2store');
+$menu_id = $app->input->getInt('Itemid');
+if($app->getMenu()){
+	$active = $app->getMenu()->getActive();
 	if(isset($active)){
-		$menu_id = $platform->application()->getMenu()->getActive()->id;
+		$menu_id = $app->getMenu()->getActive()->id;
 	}
 }
 $menu_id = isset($menu_id) ? $menu_id : 0;
